@@ -23,9 +23,9 @@ fn main() {
     let temp_unit = temp_unit.trim();
 
     if temp_unit == "f" || temp_unit == "F" {
-        result += (temp * 9/5) as f64 + 32.0
+        result = (temp as f64 * 9.0/5.0) + 32.0
     } else if temp_unit == "c" || temp_unit == "C" {
-        result += (temp - 32) as f64 * 5.0/9.0  
+        result = (temp as f64 - 32.0) * 5.0/9.0  
     } else {
         println!("Please enter correct unit.");
     }
