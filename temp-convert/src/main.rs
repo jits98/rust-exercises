@@ -16,23 +16,32 @@ fn main() {
         .read_line(&mut temp)
         .expect("Failed to read input");
 
-    let temp: i32 = temp.trim().parse().expect("Not a valid number");
+    let temp: f64 = temp.trim().parse().expect("Enter a valid number");
 
-    let mut result:f64 = 0.0;
+   
 
-    let temp_unit = temp_unit.trim();
+    let temp_unit = temp_unit.trim().to_lowercase();
 
-    if temp_unit == "f" || temp_unit == "F" {
-        result = (temp as f64 * 9.0/5.0) + 32.0
-    } else if temp_unit == "c" || temp_unit == "C" {
-        result = (temp as f64 - 32.0) * 5.0/9.0  
-    } else {
-        println!("Please enter correct unit.");
-    }
+    let result = match temp_unit.as_str() {
+        "f" => temp * 9.0/5.0 + 32.0,
+        "c" => (temp - 32.0) * 5.0 / 9.0,
+        _ => {
+            println!("Invalid unit. Use 'f' or 'c'");
+            return;
+        }
+    };
+
+    // if temp_unit == "f" || temp_unit == "F" {
+    //     result = (temp as f64 * 9.0/5.0) + 32.0
+    // } else if temp_unit == "c" || temp_unit == "C" {
+    //     result = (temp as f64 - 32.0) * 5.0/9.0  
+    // } else {
+    //     println!("Please enter correct unit.");
+    // }
     
-    println!("Here is your temperature unit: {}", temp_unit);
-    println!("Here is your temperature number: {}", temp);
+    println!("You want to convert in: {}", temp_unit);
+    println!("You want to convert this temperature number: {}", temp);
 
-    println!("Here is your converted answer: {}", result);
+    println!("Converted temperature: {}", result);
 
 }
