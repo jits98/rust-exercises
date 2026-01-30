@@ -1,9 +1,12 @@
 use std::io;
 
 fn main() {
+    println!("This program convert celsius to fahrenheit and vice versa.");
+
     println!("In Which temperature unit do you want to convert in 'fahrenheit' or 'celsius' write 'f' for fahrenheit and 'c' for celsius?");
 
     let mut temp_unit = String::new();
+
     let mut temp = String::new();
 
     io::stdin()
@@ -17,8 +20,6 @@ fn main() {
         .expect("Failed to read input");
 
     let temp: f64 = temp.trim().parse().expect("Enter a valid number");
-
-   
 
     let temp_unit = temp_unit.trim().to_lowercase();
 
@@ -39,9 +40,7 @@ fn main() {
     //     println!("Please enter correct unit.");
     // }
     
-    println!("You want to convert in: {}", temp_unit);
-    println!("You want to convert this temperature number: {}", temp);
 
-    println!("Converted temperature: {}", result);
+    println!("Converted temperature: {:.2}", result);
 
 }
