@@ -6,44 +6,45 @@ fn main() {
 
     println!("Please enter the first number from which the fibonacci series will start:");
     
-    // taking fibonacci series starting number from the user
-
+    let fibonacci_first_number : i32;
     loop {
-
-        let mut fibonacci_first_number = String::new();
-
+        // taking fibonacci series starting number from the user
+        let mut input = String::new();
         // reading the user input 
         io::stdin()
-            .read_line(&mut fibonacci_first_number)
+            .read_line(&mut input)
             .expect("Failed to read the line");
     
-        match fibonacci_first_number.trim().parse::<i32>() {
-            Ok (fibonacci_first_number) => {
-                println!("You entered: {} for the first number in the fibonacci series", fibonacci_first_number);
+        match input.trim().parse::<i32>() {
+            Ok(num) => {
+                println!("You entered: {} for the first number in the fibonacci series", num);
+                fibonacci_first_number = num;
                 break;
-            }
+            },
             Err(_) => {
                 println!("Please enter a valid number: ");
-            }
+            }     
         }           
     };
 
     println!("Please enter the second number for the fibonacci series:");
 
+    let fibonacci_second_number : i32; 
+    
     loop {      
         // taking fibonacci series second number from the user
-        let mut fibonacci_second_number = String::new(); 
-
+        let mut input2 = String::new();
         // reading the user input 
         io::stdin()
-            .read_line(&mut fibonacci_second_number)
+            .read_line(&mut input2)
             .expect("Failed to read the line");         
     
-        match fibonacci_second_number.trim().parse::<i32> () {
-            Ok(fibonacci_second_number) => {
-                println!("You entered: {} as the second number for the fibonacci series", fibonacci_second_number);
+        match input2.trim().parse::<i32> () {
+            Ok(num2) => {
+                println!("You entered: {} as the second number for the fibonacci series", num2);
+                fibonacci_second_number = num2;
                 break;
-            }
+            },
             Err(_) => {
                 println!("Please enter a valid number: ");
             }
@@ -54,18 +55,19 @@ fn main() {
 
     // Asking user for the position for which he/she want the fibonacci number
 
+    let num_position: i32;
     loop {      
         // taking fibonacci series second number from the user
-        let mut num_position = String::new();
-
+        let mut input3 = String::new();
         // reading the user input 
         io::stdin()
-            .read_line(&mut num_position)
+            .read_line(&mut input3)
             .expect("Failed to read number.");       
     
-        match num_position.trim().parse::<i32> () {
-            Ok(num_position) => {
-                println!("You entered: {} as position number for the fibonacci number", num_position);
+        match input3.trim().parse::<i32> () {
+            Ok(num3) => {
+                println!("You entered: {} as position number for the fibonacci number", num3);
+                num_position = num3;
                 break;
             }
             Err(_) => {
@@ -73,5 +75,14 @@ fn main() {
             }
         }         
     };
+
+    // Fibonacci number Output needs to change the logic here
+    let mut fibonacci_number = 0; 
+    while num_position <= num_position {
+        fibonacci_number += fibonacci_first_number + fibonacci_second_number;
+        println!("{}", fibonacci_number);
+        
+    }
+    
 
 }
