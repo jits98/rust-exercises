@@ -39,6 +39,16 @@ fn main() {
         return;
     }
    
-    
+   let mut fib: Vec<u64> = Vec::new(); 
+
+   fib.push(0);
+   fib.push(1);
+
+   for i in 2..num_position {
+    let next = fib[i - 1] + fib [i -2];
+    fib.push(next);
+   }
+
+   println!("Fibonacci number at position {} is {}", num_position, fib[num_position - 1])    
 
 }
