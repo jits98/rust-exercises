@@ -29,7 +29,7 @@ fn print_day_intro(day: u32) {
 }
 
 fn print_gifts(day: u32) {
-    for gifts in (1..=day).rev() {
+    for gift in (1..=day).rev() {
         match gift {
             12 => println!("Twelve drummers drumming,"),
             11 => println!("Eleven pipers piping,"),
