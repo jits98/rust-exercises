@@ -22,29 +22,35 @@ fn initial_balance() -> u32 {
 }
 
 fn choose_an_action() {
-    let balance = initial_balance();
-    println!("Choose an action:");
-    println!("1. Deposit\n2. Withdraw\n3. Check Balance");
+    let mut balance = initial_balance();
     
     loop {
+        println!("Choose an action:");
+        println!("1. Deposit\n2. Withdraw\n3. Check Balance");
         let mut input = String::new();
         
         io::stdin()
         .read_line(&mut input)
         .expect("Failed to read the input");
     
-    let amount = math_on_amount();
     
-         match input.trim().parse() {
-                Ok(1) => {
-                    let sum =  balance + amount;
-                    println!("Deposit Successful\nCurrent balance: {}", sum);
+    match input.trim().parse() {
+        Ok(1) => {
+                    let amount = math_on_amount();
+                    balance += amount;
+                    println!("Deposit Successful\nCurrent balance: {}", balance);
                     break;
                 },
                 Ok(2) => {
-                    let sum =  balance - amount;
-                    println!("Withdrawal Successful\nCurrent balance: {}", sum);
+                    let amount = math_on_amount();
+                    if amount > balance {
+                        println!("Insufficient balance");
+                    }
+                    else {
+                    balance -= amount;
+                    println!("Withdrawal Successful\nCurrent balance: {}", balance);
                     break;
+                    }
                 },
                 Ok(3) => {
                     println!("Current Balance: {}", balance);
