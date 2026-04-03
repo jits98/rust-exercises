@@ -1,40 +1,74 @@
-mod auth {
-  pub mod login {
-    pub fn authenticate(username: &str, password: &str) -> bool {
-      validate_credentials(username, password) && 
-      check_rate_limit(username)
+mod database {
+  pub mod connection {
+    pub struct Connection {
+      url: String,
     }
 
-    fn validate_credentials(username: &str, password: &str) -> bool {
-       !username.is_empty() && password.len() >= 8
-    }
+    impl Connection {
+      pub fn new(url: &str) -> Self {
+        Connection {url: url.to_string()}
+      }
 
-    fn check_rate_limit(username: &str) -> bool {
-      true
+      pub fn connect(&self) {
+        println!("Connecting to {}", self.url);
+      }
     }
   }
 
-  pub mod registration {
-    use super::login::validate_credentials;
-
-    pub fn register(username: &str, password: &str, email: &str) -> bool {
-      validate_credentials(username, password) && 
-      validate_email(email)
-    }
-
-    fn validate_email(email: &str) -> bool {
-      email.contains('@')
+  pub mod queries {
+    pub fn find_user(id: u32) -> String {
+      format!("User {}", id)
     }
   }
 }
 
-use auth::login;
-use auth::registration::register as user_register;
+pub use database::connection::Connection;
+pub use database::queries::find_user;
 
-pub fn main() {
-  login::authenticate("alice", "secret123");
-  user_register("bob", "pass1234", "bob@example.com");
+
+fn main() {
+  let conn = Connection::new("localhost:5432");
+  conn.connect();
+  println!("{}", find_user(42));
 }
+
+// mod auth {
+//   pub mod login {
+//     pub fn authenticate(username: &str, password: &str) -> bool {
+//       validate_credentials(username, password) && 
+//       check_rate_limit(username)
+//     }
+
+//     fn validate_credentials(username: &str, password: &str) -> bool {
+//        !username.is_empty() && password.len() >= 8
+//     }
+
+//     fn check_rate_limit(username: &str) -> bool {
+//       true
+//     }
+//   }
+
+//   pub mod registration {
+//     use super::login::validate_credentials;
+
+//     pub fn register(username: &str, password: &str, email: &str) -> bool {
+//       validate_credentials(username, password) && 
+//       validate_email(email)
+//     }
+
+//     fn validate_email(email: &str) -> bool {
+//       email.contains('@')
+//     }
+//   }
+// }
+
+// use auth::login;
+// use auth::registration::register as user_register;
+
+// pub fn main() {
+//   login::authenticate("alice", "secret123");
+//   user_register("bob", "pass1234", "bob@example.com");
+// }
 
 // use std::io;
 
